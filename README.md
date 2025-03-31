@@ -39,17 +39,15 @@ spring.jpa.show-sql=true
 ### Médicos
 
 - **GET** `/medicos` - Lista todos os médicos
-- **GET** `/medicos/{id}` - Obtém um médico pelo ID
 - **POST** `/medicos` - Cadastra um novo médico
-- **PUT** `/medicos/{id}` - Atualiza um médico
+- **PUT** `/medicos` - Atualiza um médico
 - **DELETE** `/medicos/{id}` - Remove um médico
 
 ### Pacientes
 
 - **GET** `/pacientes` - Lista todos os pacientes
-- **GET** `/pacientes/{id}` - Obtém um paciente pelo ID
 - **POST** `/pacientes` - Cadastra um novo paciente
-- **PUT** `/pacientes/{id}` - Atualiza um paciente
+- **PUT** `/pacientes` - Atualiza um paciente
 - **DELETE** `/pacientes/{id}` - Remove um paciente
 
 ## Como Executar o Projeto
