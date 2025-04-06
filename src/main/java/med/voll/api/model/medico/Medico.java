@@ -1,40 +1,43 @@
-package med.voll.api.model;
+package med.voll.api.model.medico;
 
 import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import med.voll.api.dto.DadosAtualizarMedico;
-import med.voll.api.dto.DadosAtualizarPaciente;
-import med.voll.api.dto.DadosCadastroPaciente;
+import med.voll.api.dto.medico.AtualizarMedicoDto;
+import med.voll.api.dto.medico.CadastroMedicoDto;
+import med.voll.api.model.Endereco;
 
-@Getter
+@Entity(name = "Medico")
+@Table(name = "medicos")
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-@Entity(name = "Paciente")
-@Table(name = "pacientes")
-public class Paciente {
+public class Medico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private String email;
     private String telefone;
-    private String cpf;
+    private String crm;
+
+    @Enumerated(EnumType.STRING)
+    private Especialidade especialidade;
 
     @Embedded
     private Endereco endereco;
 
-    public Paciente() {}
+    public Medico() {}
 
-    public Paciente(DadosCadastroPaciente dados) {
+    public Medico(CadastroMedicoDto dados) {
         this.nome = dados.nome();
         this.email = dados.email();
-        this.telefone = dados.telefone();
-        this.cpf = dados.cpf();
+        this.telefone =dados.telefone();
+        this.crm = dados.crm();
         this.endereco = new Endereco(dados.endereco());
+        this.especialidade = dados.especialidade();
     }
 
     public Long getId() {
@@ -53,15 +56,19 @@ public class Paciente {
         return telefone;
     }
 
-    public String getCpf() {
-        return cpf;
+    public String getCrm() {
+        return crm;
+    }
+
+    public Especialidade getEspecialidade() {
+        return especialidade;
     }
 
     public Endereco getEndereco() {
         return endereco;
     }
 
-    public void atualizarInformacoes(DadosAtualizarPaciente dados) {
+    public void atualizarInformacoes(AtualizarMedicoDto dados) {
         if (dados.nome() != null) {
             this.nome = dados.nome();
         }
@@ -72,5 +79,4 @@ public class Paciente {
             this.endereco.atualizarInformacoes(dados.endereco());
         }
     }
-
 }
